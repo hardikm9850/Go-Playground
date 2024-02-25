@@ -62,3 +62,9 @@ func main() {
 }
 
 ```
+
+#### Function naming convention
+
+Exported Methods: If a method name starts with a capital letter, it means the method is exported from the package and can be accessed by code outside of the package where it is defined.
+
+Unexported Methods: If a method name starts with a lowercase letter, it means the method is unexported, and it is only accessible within the package where it is defined.
