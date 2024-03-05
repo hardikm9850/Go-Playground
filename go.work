@@ -1,0 +1,9 @@
+go 1.22.0
+
+use (
+	Hello_world/greetings
+	Hello_world/hello
+	Hello_world/quote
+	./GoByExample/tempconv
+	./gorm
+)
