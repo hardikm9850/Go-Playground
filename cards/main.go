@@ -11,6 +11,9 @@ func main() {
 	if fileSaveError != nil {
 		panic(fileSaveError)
 	}
+
+	deck := createDeckFromFile("saved_deck")
+	deck.print()
 }
 
 func dealWithCards(cards deck) {
