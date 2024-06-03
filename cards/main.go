@@ -4,16 +4,32 @@ package main
 // https://www.udemy.com/course/go-the-complete-developers-guide/
 func main() {
 	cards := createDeck()
+	cards.print()
 
+	println("========Shuffling the deck ========\n\n")
+	cards.shuffle()
+	cards.print()
+
+	println("========Dealing with the deck ========\n\n")
 	dealWithCards(cards)
 
-	fileSaveError := cards.saveToFile("saved_deck")
+	println("========Saving the deck to storage ========\n\n")
+	saveDeckToStorage(cards)
+
+	println("========Creating the deck from the storage ========\n\n")
+	createDeckFromStorage()
+}
+
+func createDeckFromStorage() {
+	deck := createDeckFromFile("saved_deck")
+	deck.print()
+}
+
+func saveDeckToStorage(cards deck) {
+	fileSaveError := cards.saveDeckToFile("saved_deck")
 	if fileSaveError != nil {
 		panic(fileSaveError)
 	}
-
-	deck := createDeckFromFile("saved_deck")
-	deck.print()
 }
 
 func dealWithCards(cards deck) {
