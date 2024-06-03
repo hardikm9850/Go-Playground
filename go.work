@@ -1,9 +1,10 @@
-go 1.22.0
+go 1.22.1
 
 use (
+	./GoByExample/tempconv
+	./gorm
 	Hello_world/greetings
 	Hello_world/hello
 	Hello_world/quote
-	./GoByExample/tempconv
-	./gorm
+	cards
 )
