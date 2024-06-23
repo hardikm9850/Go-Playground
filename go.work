@@ -6,5 +6,5 @@ use (
 	Hello_world/greetings
 	Hello_world/hello
 	Hello_world/quote
-	cards
+	./go_the_complete_guide/cards
 )
