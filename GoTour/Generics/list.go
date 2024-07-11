@@ -28,15 +28,15 @@ func (list *List[T]) addNode(value T) {
 }
 
 func (list *List[T]) print() {
-	for temp := &list; ; {
-		fmt.Printf("%v -> ", (*temp).value)
-		if (*temp).next != nil {
-			*temp = (*temp).next
-		} else {
-			break
+	for temp := list; temp != nil; temp = temp.next {
+		fmt.Printf("%v", temp.value)
+		if temp.next != nil {
+			fmt.Printf(" -> ")
 		}
 	}
+	fmt.Println()
 }
+
 
 func main() {
 	myList := createList[int](5)
