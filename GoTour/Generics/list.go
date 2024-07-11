@@ -6,66 +6,45 @@ import (
 	"fmt"
 )
 
-type node[T any] struct {
-	Data T
-	next *node[T]
+// List represents a singly-linked list that holds
+// values of any type.
+type List[T any] struct {
+	next *List[T]
+	value  T
 }
 
-type list[T any] struct {
-	start *node[T]
+func createList[T any](initialVal T) List[T] {
+	newNode := List[T]{nil, initialVal}
+	return newNode
 }
 
-func (l *list[T]) add(data T) {
-	n := node[T]{
-		Data: data,
-		next: nil,
+func (list *List[T]) addNode(value T) {
+	node := list
+	for node.next != nil {
+		node = node.next
 	}
+	newNode := List[T] {nil, value}
+	node.next = &newNode
+}
 
-	if l.start == nil {
-		l.start = &n
-		return
+func (list *List[T]) print() {
+	for temp := &list; ; {
+		fmt.Printf("%v -> ", (*temp).value)
+		if (*temp).next != nil {
+			*temp = (*temp).next
+		} else {
+			break
+		}
 	}
-
-	if l.start.next == nil {
-		l.start.next = &n
-		return
-	}
-
-	temp := l.start
-	l.start = l.start.next
-	l.add(data)
-	l.start = temp
 }
 
 func main() {
-	var myList list[int]
-	fmt.Println(myList)
-	myList.add(12)
-	myList.add(9)
-	myList.add(3)
-	myList.add(9)
-
-	// Print all elements
-	cur := myList.start
-	for {
-		fmt.Println("*", cur)
-		if cur == nil {
-			break
-		}
-		fmt.Println("*", cur.Data)
-		cur = cur.next
-	}
+	myList := createList[int](5)
+	
+	myList.addNode(10)
+	myList.addNode(15)
+	myList.addNode(20)
+	
+	myList.print()
+	
 }
-
-// ------- output ------- 
-
-{<nil>}
-* &{12 0xc000014080}
-* 12
-* &{9 0xc0000140a0}
-* 9
-* &{3 0xc0000140d0}
-* 3
-* &{9 <nil>}
-* 9
-* <nil>
