@@ -22,7 +22,7 @@ func startServer() {
 			fmt.Fprintf(w, "Url Param 'abc' is missing")
 			return
 		}
-		fmt.Fprintf(w, "Url Param 'abc' = %s\n", value[0]) // We pass w parameter to printF write the response directly to the client
+		fmt.Fprintf(w, "Url Param 'abc' = %s\n", value[0]) // We pass w parameter to printF to write the response directly to the client
 	})
 	fmt.Println("Starting server at port 8080")
 	http.ListenAndServe(":8080", nil)
