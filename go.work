@@ -2,9 +2,10 @@ go 1.22.1
 
 use (
 	./GoByExample/tempconv
+	./go_the_complete_guide/cards
 	./gorm
 	Hello_world/greetings
 	Hello_world/hello
 	Hello_world/quote
-	./go_the_complete_guide/cards
+	Microservices/Model
 )
