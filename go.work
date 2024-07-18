@@ -7,5 +7,5 @@ use (
 	Hello_world/greetings
 	Hello_world/hello
 	Hello_world/quote
-	Microservices/Model
+	Microservices
 )

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"microservice/model"
 	"net/http"
@@ -30,7 +31,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		executePostMethod(r, w)
 	default:
 	}
-
 }
 
 func executeGetMethod(r *http.Request, w http.ResponseWriter) {
@@ -46,8 +46,32 @@ func executeGetMethod(r *http.Request, w http.ResponseWriter) {
 
 func executePostMethod(r *http.Request, w http.ResponseWriter) {
 	var requestData model.RequestData2
-	
+
+	// json decoding
+	err := json.NewDecoder(r.Body).Decode(&requestData)
+	if err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+	}
+
 	requestData.PrintMe()
-	fmt.Printf("requestData: %v\n", requestData)
+	found := false
+	for _, color := range requestData.Colors {
+		if color.Band == requestData.BandToFind {
+			found = true
+			break
+		}
+	}
+	response := model.ResponseData{
+		Status: found,
+	}
+
+	responseJSON, err := json.Marshal(response)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(responseJSON)
 
 }
