@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"model"
+	"microservice/model"
 	"net/http"
 )
 
@@ -46,8 +46,8 @@ func executeGetMethod(r *http.Request, w http.ResponseWriter) {
 
 func executePostMethod(r *http.Request, w http.ResponseWriter) {
 	var requestData model.RequestData2
-
-	requestData.printMe()
+	
+	requestData.PrintMe()
 	fmt.Printf("requestData: %v\n", requestData)
 
 }
