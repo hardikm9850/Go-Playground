@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"model"
 )
 
 func main() {
@@ -14,16 +16,38 @@ func startServer() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Hello there!\n")
 	})
-	http.HandleFunc("/api", func(w http.ResponseWriter, request *http.Request) {
-		query := request.URL.Query()
-		value, ok := query["abc"] //type Values map[string][]string -> returns map of <string, list<string>>
+	http.HandleFunc("/api", handler)
 
-		if !ok || len(value[0]) < 1 {
-			fmt.Fprintf(w, "Url Param 'abc' is missing")
-			return
-		}
-		fmt.Fprintf(w, "Url Param 'abc' = %s\n", value[0]) // We pass w parameter to printF to write the response directly to the client
-	})
 	fmt.Println("Starting server at port 8080")
 	http.ListenAndServe(":8080", nil)
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	method := r.Method
+	switch method {
+	case http.MethodGet:
+		executeGetMethod(r, w)
+	case http.MethodPost:
+		executePostMethod(r, w)
+	default:
+	}
+
+}
+
+func executeGetMethod(r *http.Request, w http.ResponseWriter) {
+	query := r.URL.Query()
+	value, ok := query["abc"]
+
+	if !ok || len(value[0]) < 1 {
+		fmt.Fprintf(w, "Url Param 'abc' is missing")
+		return
+	}
+	fmt.Fprintf(w, "Url Param 'abc' = %s\n", value[0])
+}
+
+func executePostMethod(r *http.Request, w http.ResponseWriter) {
+	var requestData RequestData
+	requestData.print()
+	
+
 }
