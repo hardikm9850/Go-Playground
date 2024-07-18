@@ -1,10 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"net/http"
 	"model"
+	"net/http"
 )
 
 func main() {
@@ -46,8 +45,9 @@ func executeGetMethod(r *http.Request, w http.ResponseWriter) {
 }
 
 func executePostMethod(r *http.Request, w http.ResponseWriter) {
-	var requestData RequestData
-	requestData.print()
-	
+	var requestData model.RequestData2
+
+	requestData.printMe()
+	fmt.Printf("requestData: %v\n", requestData)
 
 }
