@@ -6,7 +6,7 @@ import (
 	"microservice/model"
 	"microservice/model/operation"
 	"net/http"
-
+	"microservice/math"
 	"github.com/go-playground/validator/v10"
 )
 
@@ -86,6 +86,7 @@ func executePostMethod(r *http.Request, w http.ResponseWriter) {
 	w.Write(responseJSON)
 
 }
+
 // ================================ Operation ============================
 
 func performOperation(w http.ResponseWriter, r *http.Request) {
@@ -107,23 +108,14 @@ func performOperation(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Received operation: %s", str)
 	switch operation.Operation {
 	case "add":
-		result := add(operation.Operands)
+		result := math.Add(operation.Operands)
 		json.NewEncoder(w).Encode(result)
 	case "subtract":
-		result := subtract(operation.Operands)
+		result := math.Subtract(operation.Operands)
 		json.NewEncoder(w).Encode(result)
 	default:
 		http.Error(w, "Invalid operation", http.StatusBadRequest)
 	}
 }
 
-func add(s []int) int {
-	result := s[0] + s[1]
-	return result
-}
-
-func subtract(s []int) int {
-	result := s[0] - s[1]
-	return result
-}
 
