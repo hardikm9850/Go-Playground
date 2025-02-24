@@ -1,5 +1,16 @@
 ## Fundamentals
 
+### Declaring variables 
+```
+s := "" - It may be used only within a function, not for package-level variables
+var s string  - This form relies on default initialization to the zero value for strings, which is ""
+var s = ""  - 
+var s string = ""
+```
+In practice, you should generally
+use one of the first two forms, with explicit initialization to say that the initial value isimportant and implicit initialization to say that the initial value doesn’t matter.
+
+
 * #### [Data types](Fundamentals/data_types.md)
 * #### [Format verbs](Fundamentals/format_verbs.md)
 * #### [GoTour exercise](GoTour)
